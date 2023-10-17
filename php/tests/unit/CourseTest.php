@@ -1,5 +1,7 @@
 <?php
 
+use BatBook\Course;
+
 class CourseTest extends \Codeception\Test\Unit
 {
     /**
@@ -9,7 +11,6 @@ class CourseTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        require_once 'src/Course.php';
     }
 
     protected function _after()
@@ -49,7 +50,7 @@ class CourseTest extends \Codeception\Test\Unit
     public function testToString()
     {
         $course = new Course('Cycle1', 1, 'Vliteral1', 'Cliteral1');
-        $expectedString = "<div clas='course'>
+        $expectedString = "<div class='course'>
                     <h3>Cycle: Cycle1</h3>
                     <h5>ID Family: 1<h5>
                     <h6>Vliteral: Vliteral1</h6>
@@ -72,7 +73,7 @@ class CourseTest extends \Codeception\Test\Unit
 
     public function testLoadModulesFromFile()
     {
-        $filename = 'src/coursesbook.csv';
+        $filename = 'src/files/coursesbook.csv';
         $courses = Course::loadCoursesFromFile($filename);
         $this->assertIsArray($courses);
         $this->assertNotEmpty($courses);

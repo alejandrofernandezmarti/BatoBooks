@@ -1,7 +1,7 @@
 <?php
 
-
-use exceptions\WeekPasswordException;
+use BatBook\Exempcions\WeekPasswordException;
+use BatBook\User;
 
 class UserTest extends \Codeception\Test\Unit
 {
@@ -12,7 +12,6 @@ class UserTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        require_once 'src/User.php';
     }
 
     protected function _after()

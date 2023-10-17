@@ -1,5 +1,7 @@
 <?php
 
+use BatBook\Book;
+
 class BookTest extends \Codeception\Test\Unit
 {
     /**
@@ -9,7 +11,6 @@ class BookTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        require_once 'src/Book.php';
     }
 
     protected function _after()

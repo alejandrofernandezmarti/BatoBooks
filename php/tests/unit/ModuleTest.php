@@ -1,5 +1,7 @@
 <?php
 
+use BatBook\Module;
+
 class ModuleTest extends \Codeception\Test\Unit
 {
     /**
@@ -9,7 +11,6 @@ class ModuleTest extends \Codeception\Test\Unit
 
     protected function _before()
     {
-        require_once 'src/Module.php';
     }
 
     protected function _after()
@@ -70,7 +71,7 @@ class ModuleTest extends \Codeception\Test\Unit
 
     public function testLoadModulesFromFile()
     {
-        $filename = 'src/modulesbook.csv'; // Especifica el camí correcte al teu fitxer CSV de prova
+        $filename = 'src/files/modulesbook.csv'; // Especifica el camí correcte al teu fitxer CSV de prova
         $modules = Module::loadModulesFromFile($filename);
         $this->assertIsArray($modules);
         $this->assertNotEmpty($modules);

@@ -1,10 +1,10 @@
 {
-    "name": "batoibooks",
+    "name": "batoi/books",
     "description": "Batoi Books",
     "license" : "MIT",
     "autoload": {
         "psr-4": {
-            "App\\": "src/App"
+            "BatBook\\": "src/App"
         }
     },
     "authors": [
