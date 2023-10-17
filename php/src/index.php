@@ -19,8 +19,8 @@ try {
 }
 
 
-$users[] = new User("alex@gmail.com","asdfghjK1","ThisNick");
-$books[] = new Book(1,"0011","Barco de vapor",15.00,330,"new","noPhoto","libro");
+$users[] = new User("arthurdteixeira2004@gmail.com","asdfghjK1","coowboii");
+$books[] = new Book(1,"0011","Anaya",1.00,5,"new","noPhoto","libro de usuario1");
 
 foreach ($users as $key => $value){
     echo $value;
