@@ -36,12 +36,9 @@
 <body>
 <div id="header">
     <div id="nav-buttons">
-        <button><a href="../logout.php">Logout</a></button>
-        <button><a href="../newBook.php">New Book</a></button>
+        <button><a href="../login.php">Login</a></button>
+        <button><a href="../register.php">Register</a></button>
     </div>
 </div>
 </body>
 </html>
-
-
-

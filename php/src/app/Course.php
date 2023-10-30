@@ -17,24 +17,36 @@ class Course
     /**
      * @throws InvalidFormatException
      */
-    public static function loadCoursesFromFile($fileName): array
+    public static function loadCoursesFromFile($archivo)
     {
-        $file = fopen($fileName, "r");
-        $courses = [];
-        if ($file) {
-            try {
-                while (($content = fgetcsv($file)) !== false) {
-                    if (count($content) !== 5) {
-                        throw new InvalidFormatException("Dada de línia invàlida: " . implode(", ", $content));
+        if (file_exists($archivo)) {
+            $courses = array();
+            if (($fp = fopen($archivo, "r")) !== false) {
+                while (($data = fgetcsv($fp, 1000, ",")) !== false) {
+                    try {
+                        if (count($data) !== 5) {
+                            throw new InvalidFormatException ("Dada de Linia invàlida: " . implode(",", $data));
+                        }
+                        $idCycle = $data[0];
+                        $cycle = $data[1];
+                        $idFamily = $data[2];
+                        $vliteral = $data[3];
+                        $cliteral = $data[4];
+
+                        $courses[$idCycle] = new Course($cycle, $idFamily, $vliteral, $cliteral);
+                    } catch (InvalidFormatException $e) {
+                        echo "InvalidFormatException: " . $e->getMessage(), "<br/>";
+                        continue;
                     }
-                    $courses[] = new Course($content[1], intval($content[2]), $content[3], $content[4]);
                 }
-            } catch (Exception $e) {
-                echo 'InvalidFormatException: ', $e->getMessage(), "<br>";
+                fclose($fp);
+                return $courses;
+            } else {
+                return "No se ha podido abrir el archivo.";
             }
+        } else {
+            return "El archivo no existe.";
         }
-        fclose($file);
-        return $courses;
     }
 
     public function getCycle(): string

@@ -11,7 +11,7 @@ class Book
         private int     $pages,
         private string  $status,
         private string  $photo,
-        private string  $comments,
+        private ?string  $comments = null,
         private ?string $soldDate = null
     )
     {

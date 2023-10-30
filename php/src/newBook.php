@@ -2,12 +2,12 @@
 
 use BatBook\Book;
 use BatBook\Exempcions\InvalidFormatException;
-include_once "../../load.php";
-include_once "../../myHelpers/utils.php";
+include_once "load.php";
+include_once "myHelpers/utils.php";
 $errors = [];
 
 try {
-    $modules = \BatBook\Module::loadModulesFromFile("../../files/modulesbook.csv");
+    $modules = \BatBook\Module::loadModulesFromFile("files/modulesbook.csv");
 } catch (InvalidFormatException $e) {
     echo $e->getMessage();
 }
@@ -28,15 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if (empty($_POST['pages'])){
         $errors['pages'] = 'Error el camp pages es un camp requerit';
-    }else{ $pages = $_POST['pages'];}
-
+    }else{$pages = $_POST['pages'];}
 
     if (empty($_POST['status'])){
         $errors['status'] = 'Error el camp estat es un camp requerit';
     }else{ $status = $_POST['status'];}
 
     if (!empty($_POST['comments'])){
-        $comments = $_POST['comments'];
+         $comments = $_POST['comments'];
+    }else{
+        $comments = "";
     }
 
     if ($_FILES['photo']['type']!= 'image/png'){
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
         // subido con éxito
         $nombre = $_FILES['photo']['name'];
-        move_uploaded_file($_FILES['photo']['tmp_name'], "./uploads/{$nombre}");
+        move_uploaded_file($_FILES['photo']['tmp_name'], "./views/books/uploads/{$nombre}");
         $photo = "<img src=uploads/$nombre>";
     }
     try {
@@ -54,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     } catch (Exception $e) {
         echo $e->getMessage();
-        include_once '../newBook.view.php';
+        include_once 'views/newBook.view.php';
         exit();
     }
 
@@ -62,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo $newBook;
 
 
+}else{
+    include_once 'views/newBook.view.php';
 }
 
 
