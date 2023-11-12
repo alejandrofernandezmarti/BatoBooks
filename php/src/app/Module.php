@@ -2,14 +2,15 @@
 
 namespace BatBook;
 use BatBook\Exempcions\InvalidFormatException;
+use PDO;
 
-class Module
-{
+class Module{
+    static string $nameTable = 'modules';
     public function __construct(
-        private string $code,
-        private string $cliteral,
-        private string $vliteral,
-        private string $idCycle
+        private string $code='',
+        private string $cliteral='',
+        private string $vliteral='',
+        private string $idCycle=''
     )
     {
     }
@@ -17,6 +18,36 @@ class Module
     /**
      * @throws InvalidFormatException
      */
+
+    public static function getModulesInArray(){
+        $data = [];
+
+        try {
+            $newConexion = new Connection();
+            $conexion = $newConexion->getConection();
+
+            $sql = "SELECT * FROM modules";
+
+            $sentencia = $conexion -> prepare($sql);
+            $sentencia -> setFetchMode(PDO::FETCH_CLASS,Module::class);
+            $sentencia ->execute();
+
+            $data = $sentencia -> fetchAll();
+
+            while ($module = $sentencia -> fetch()){
+                $data[] = new Module($module->code,$module->cliteral,$module->vliteral,$module->idCycle);
+            }
+
+        }catch (\PDOException $e){
+            throw new \Exception("Error de la consulta: "  . $e->getMessage());
+        }
+        return $data;
+    }
+    public static function getModuleById($idModule){
+        $values['code'] = $idModule;
+        return QueryBuilder::sql(Module::class,$values);
+    }
+
     public static function loadModulesFromFile($fileName): array
     {
         $file = fopen($fileName, "r");

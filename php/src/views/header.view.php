@@ -38,6 +38,7 @@
     <div id="nav-buttons">
         <button><a href="../logout.php">Logout</a></button>
         <button><a href="../newBook.php">New Book</a></button>
+        <button><a href="../myBooks.php">My books</a></button>
     </div>
 </div>
 </body>

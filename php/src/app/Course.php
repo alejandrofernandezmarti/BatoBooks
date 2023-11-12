@@ -3,8 +3,8 @@
 namespace BatBook;
 use BatBook\Exempcions\InvalidFormatException;
 
-class Course
-{
+class Course{
+    static string $nameTable = 'courses';
     public function __construct(
         private string $cycle,
         private int    $idFamily,
@@ -48,6 +48,7 @@ class Course
             return "El archivo no existe.";
         }
     }
+
 
     public function getCycle(): string
     {

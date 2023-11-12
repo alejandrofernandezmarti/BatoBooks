@@ -1,19 +1,22 @@
-<?php
-
-use BatBook\Book;
+<?php use BatBook\Book;
 use BatBook\Exempcions\InvalidFormatException;
+
+include 'app/QueryBuilder.php';
+include 'app/Book.php';
 include_once "load.php";
 include_once "myHelpers/utils.php";
-$errors = [];
 
+$idBook = $_GET['id'];
+$book = \BatBook\QueryBuilder::find(\BatBook\Book::class,$idBook);
 try {
     $modules = \BatBook\Module::loadModulesFromFile("files/modulesbook.csv");
 } catch (InvalidFormatException $e) {
     echo $e->getMessage();
 }
 $estados = ["new","good","used","bad"];
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (empty($_POST['module'])){
         $errors['module'] = 'Error el camp module es un camp requerit';
     }else{$module = $_POST['module'];}
@@ -35,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else{ $status = $_POST['status'];}
 
     if (!empty($_POST['comments'])){
-         $comments = $_POST['comments'];
+        $comments = $_POST['comments'];
     }else{
         $comments = "";
     }
@@ -49,26 +52,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         move_uploaded_file($_FILES['photo']['tmp_name'], "./views/books/uploads/{$nombre}");
         $photo = "<img src=uploads/$nombre>";
     }
-    try {
+   /* try {
         if (count($errors)) {
             throw new Exception('Hi ha errors');
         }
     } catch (Exception $e) {
         echo $e->getMessage();
-        include_once 'views/newBook.view.php';
+        include_once 'views/editBook.view.php';
         exit();
-    }
+    } */
     $idUser = $_SESSION['userId'];
-    $newBook = new Book($idUser,$module,$publisher,$price,$pages,$status,$photo,$comments);
-    $newBook->save();
-    include_once 'myBooks.php';
-
+    // ['email' => $email]
+    $values['idUser'] = $idUser;
+    $values['idModule'] = $module;
+    $values['publisher'] =$publisher;
+    $values['price'] = $price;
+    $values['pages'] = $pages;
+    $values['status'] = $status;
+    $values['photo'] = $photo;
+    $values['comments'] = $comments;
+    \BatBook\QueryBuilder::update(Book::class,$values,$idBook);
+    header('Location: myBooks.php?');
+    exit;
 }else{
-    include_once 'views/newBook.view.php';
+    $errors='';
+    include_once 'views/editBook.view.php';
 }
-
-
-
-
-
-
+?>

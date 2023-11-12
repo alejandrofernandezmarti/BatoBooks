@@ -22,13 +22,12 @@ if (isset($_SESSION["userLoged"])){
     $userLoged = $_SESSION["userLoged"];
 }
 $books = isset($_SESSION["books"])? unserialize($_SESSION["books"]) : [];
-    $modules = isset($_SESSION["modules"])? unserialize($_SESSION["modules"]) : Module::loadModulesFromFile('./files/modulesbook.csv');;
+    $modules = isset($_SESSION["modules"])? unserialize($_SESSION["modules"]) : Module:: getModulesInArray();;
     $courses = isset($_SESSION["courses"]) ? unserialize($_SESSION["courses"]) : Course::loadCoursesFromFile('./files/coursesbook.csv');
 $statuses = isset($_SESSION["statuses"])? unserialize($_SESSION["statuses"]) : [];
 
 
 $_SESSION["users"] = serialize($infoUsers);
-$_SESSION["userLoged"] = $userLoged;
 $_SESSION["books"] = serialize($books);
 $_SESSION["modules"] = serialize($modules);
 $_SESSION["courses"] = serialize($courses);

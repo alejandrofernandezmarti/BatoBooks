@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user = new \BatBook\User($email,$password,$nick);
     $users = $user;
-    $_SESSION["users"] = serialize($users);
+    $_SESSION["userId"] = $user->save();
     $_SESSION['userLoged'] = $user;
     include_once "views/header.view.php";
     include_once "views/index.view.php";

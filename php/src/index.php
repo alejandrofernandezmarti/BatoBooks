@@ -1,7 +1,7 @@
 <?php
 include_once "load.php";
 
-if($userLoged){
+if(isset($_POST['userLoged'])){
     $nick = $userLoged->getNick();
     $email = $userLoged->getEmail();
     include_once "views/header.view.php";
