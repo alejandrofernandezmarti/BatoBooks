@@ -5,14 +5,17 @@ use BatBook\Exempcions\InvalidFormatException;
 
 class Course{
     static string $nameTable = 'courses';
+    private int $id;
     public function __construct(
-        private string $cycle,
-        private int    $idFamily,
-        private string $vliteral,
-        private string $cliteral
+        private string $cycle = '',
+        private int    $idFamily = 0,
+        private string $vliteral = '',
+        private string $cliteral=''
     )
     {
     }
+
+
 
     /**
      * @throws InvalidFormatException
@@ -88,6 +91,10 @@ class Course{
     public function setCliteral(string $cliteral): void
     {
         $this->cliteral = $cliteral;
+    }
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function __toString(): string

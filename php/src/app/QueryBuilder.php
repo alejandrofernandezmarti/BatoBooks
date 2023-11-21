@@ -1,6 +1,9 @@
 <?php
 
 namespace BatBook;
+include_once 'Course.php';
+include_once 'Familia.php';
+
 use PDO;
 include 'Connection.php';
 class QueryBuilder

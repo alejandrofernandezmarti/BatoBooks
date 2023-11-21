@@ -48,7 +48,7 @@ include_once 'header.view.php'?>
 </head>
 <body>
 
-    <form action="../editBook.php?id=<?php echo $idBook ?>"  method="post" enctype="multipart/form-data">
+    <form action="../editBook.php?id=<?php echo $idFamily ?>" method="post" enctype="multipart/form-data">
         <div>
             <label for="module">Mòdul:</label>
             <select id="module" name="module">
@@ -64,17 +64,17 @@ include_once 'header.view.php'?>
         </div>
         <div>
             <label for="publisher">Editorial:</label>
-            <input type="text" id="publisher" name="publisher" value="<?php echo $book->getPublisher(); ?>">
+            <input type="text" id="publisher" name="publisher" value="<?php echo $familia->getPublisher(); ?>">
             <span class="error"><?=printError($errors,'publisher')?></span>
         </div>
         <div>
             <label  for="price">Preu:</label>
-            <input type="number" id="price" name="price" value="<?php echo $book->getPrice(); ?>">
+            <input type="number" id="price" name="price" value="<?php echo $familia->getPrice(); ?>">
             <span class="error"><?=printError($errors,'price')?></span>
         </div>
         <div>
             <label for="pages">Pàgines:</label>
-            <input type="number" id="pages" name="pages" value="<?php echo $book->getPages(); ?>">
+            <input type="number" id="pages" name="pages" value="<?php echo $familia->getPages(); ?>">
             <span class="error"><?=printError($errors,'pages')?></span>
         </div>
         <div>
@@ -91,11 +91,11 @@ include_once 'header.view.php'?>
         </div>
         <div>
             <label for="photo">Foto:</label>
-            <input type="file" id="photo" name="photo" value="<?php $book->getPhoto(); ?>">
+            <input type="file" id="photo" name="photo" value="<?php $familia->getPhoto(); ?>">
         </div>
         <div>
             <label for="comments">Comentaris:</label>
-            <input id="comments" type="text" name="comments" value="<?php echo $book->getComments(); ?>">
+            <input id="comments" type="text" name="comments" value="<?php echo $familia->getComments(); ?>">
         </div>
         <div>
             <button type="submit">Donar d'alta</button>
