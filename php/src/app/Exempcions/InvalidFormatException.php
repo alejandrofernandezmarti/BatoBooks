@@ -2,6 +2,6 @@
 
 namespace BatBook\Exempcions;
 
-class InvalidFormatException extends \Exception{
+class InvalidFormatException extends \GodException {
 
 }

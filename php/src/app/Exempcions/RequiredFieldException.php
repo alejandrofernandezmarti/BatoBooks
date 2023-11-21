@@ -2,7 +2,7 @@
 
 namespace BatBook\Exempcions;
 
-class RequiredFieldException extends \Exception
+class RequiredFieldException extends \GodException
 {
     public function __construct($message = "Camp requerit", $code = 0, \Exception $previous = null)
     {

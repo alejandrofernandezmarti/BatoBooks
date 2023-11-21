@@ -1,13 +1,11 @@
 <?php
-
-
 namespace BatBook;
 use BatBook\Exempcions\WeekPasswordException;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class User{
     static string $nameTable = 'users';
-
-
 
     private $id;
     const PATTERN = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/';
@@ -25,14 +23,28 @@ class User{
     public function save(){
         return QueryBuilder::insert(User::class,$this->toArray());
     }
-    public static function login($email,$password)
-    {
-        $user = QueryBuilder::sql(User::class, ['email' => $email])[0];
-        if ($password === $user->getPassword()){
-            return $user;
+
+    public static function login($email,$password){
+        $log = new Logger('Antena 3');
+        $log->pushHandler(new StreamHandler('logs/login.log'),Logger::DEBUG);
+        $users = QueryBuilder::sql(User::class, ['email' => $email]);
+        if (count($users) >= 1){
+            $user = $users[0];
+            if ($password === $user->getPassword()){
+                $log->info("Usuari logejat, email ".$email);
+                return $user;
+            }
         }
+        $log->warning("Intent fallit de login amb el email ".$email);
         return false;
     }
+
+    public static function logout($email){
+        $log = new Logger('Antena 3');
+        $log->pushHandler(new StreamHandler('logs/login.log',Logger::DEBUG));
+        $log->info("El correu ".$email." ha tancat sesió");
+    }
+
     public static function getUserByField($field,$value){
         $conexionNew = new Connection();
         $conexion = $conexionNew->getConection();

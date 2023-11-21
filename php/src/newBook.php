@@ -2,6 +2,9 @@
 
 use BatBook\Book;
 use BatBook\Exempcions\InvalidFormatException;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
 include_once "load.php";
 include_once "myHelpers/utils.php";
 $errors = [];
@@ -61,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $idUser = $_SESSION['userId'];
     $newBook = new Book($idUser,$module,$publisher,$price,$pages,$status,$photo,$comments);
     $newBook->save();
+
+
     include_once 'myBooks.php';
 
 }else{

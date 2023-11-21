@@ -48,7 +48,7 @@
 <body>
 <table>
     <tr>
-        <th>IdUser</th>
+        <th>Id Book</th>
         <th>Editorial</th>
         <th>Precio</th>
         <th>Paginas</th>
@@ -62,7 +62,7 @@
     foreach ($books as $book) {
         $module = Module::getModuleById($book->getIdModule())[0];?>
         <tr>
-            <td><?php echo $book->getIdUser(); ?></td>
+            <td><?php echo $book->getId(); ?></td>
             <td><?php echo $book->getPublisher(); ?></td>
             <td><?php echo $book->getPrice(); ?></td>
             <td><?php echo $book->getPages(); ?></td>
@@ -81,6 +81,9 @@
                     </button>
                     <button class="delete">
                         <a href="deleteBook.php?id=<?php echo $book->getId()?>"><span class="material-icons">delete</span></a>
+                    </button>
+                    <button class="delete">
+                        <a href="printBook.php?id=<?php echo $book->getId()?>"><span class="material-icons">print</span></a>
                     </button>
                 </div>
             </td>

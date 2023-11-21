@@ -17,6 +17,7 @@ $estados = ["new","good","used","bad"];
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $errors=[];
     if (empty($_POST['module'])){
         $errors['module'] = 'Error el camp module es un camp requerit';
     }else{$module = $_POST['module'];}
@@ -37,22 +38,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $errors['status'] = 'Error el camp estat es un camp requerit';
     }else{ $status = $_POST['status'];}
 
+    if (empty($_POST['photo'])){
+        $photo = $book->getPhoto();
+    }else{ $status = $_POST['status'];}
+
     if (!empty($_POST['comments'])){
         $comments = $_POST['comments'];
     }else{
         $comments = "";
     }
 
-    if ($_FILES['photo']['type']!= 'image/png'){
-        $errors['photo'] = 'Error el camp foto a de ser format png';
-    }
     if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
         // subido con éxito
         $nombre = $_FILES['photo']['name'];
         move_uploaded_file($_FILES['photo']['tmp_name'], "./views/books/uploads/{$nombre}");
         $photo = "<img src=uploads/$nombre>";
     }
-   /* try {
+    try {
         if (count($errors)) {
             throw new Exception('Hi ha errors');
         }
@@ -60,9 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo $e->getMessage();
         include_once 'views/editBook.view.php';
         exit();
-    } */
+    }
     $idUser = $_SESSION['userId'];
-    // ['email' => $email]
     $values['idUser'] = $idUser;
     $values['idModule'] = $module;
     $values['publisher'] =$publisher;

@@ -2,7 +2,7 @@
 
 namespace BatBook\Exempcions;
 
-class PasswordDoNotMatchException extends \Exception
+class PasswordDoNotMatchException extends \GodException
 {
     public function __construct($message = "Les contrasenyes no coincideixen", $code = 0, \Exception $previous = null)
     {

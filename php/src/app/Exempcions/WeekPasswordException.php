@@ -2,6 +2,6 @@
 
 namespace BatBook\Exempcions;
 
-class WeekPasswordException extends \Exception{
+class WeekPasswordException extends \GodException{
 
 }

@@ -19,7 +19,7 @@
         "codeception/module-asserts": "^3.0"
     },
   "require": {
-    "ext-pdo": "*",
-    "ext-http": "*"
-  }
+        "dompdf/dompdf": "^2.0",
+        "monolog/monolog": "^3.5"
+    }
 }

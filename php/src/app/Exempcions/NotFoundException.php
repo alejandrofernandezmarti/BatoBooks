@@ -2,6 +2,6 @@
 
 namespace BatBook\Exempcions;
 
-class NotFoundException extends \Exception{
+class NotFoundException extends \GodException {
 
 }

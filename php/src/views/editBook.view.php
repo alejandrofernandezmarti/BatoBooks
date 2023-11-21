@@ -91,7 +91,7 @@ include_once 'header.view.php'?>
         </div>
         <div>
             <label for="photo">Foto:</label>
-            <input type="file" id="photo" name="photo">
+            <input type="file" id="photo" name="photo" value="<?php $book->getPhoto(); ?>">
         </div>
         <div>
             <label for="comments">Comentaris:</label>
