@@ -60,11 +60,11 @@
     <div><span class='error'><?php echo $error; ?></span></div>
 <div class='fila'>
     <label for='usuario'>Usuario:</label><br />
-    <input type='text' name='inputUsuario' id='usuario' maxlength="50" /><br />
+    <input type='text' name='inputUsuario' id='usuario' maxlength="50" required/><br />
 </div>
 <div class='fila'>
     <label for='password'>Contraseña:</label><br />
-    <input type='password' name='inputPassword' id='password' maxlength="50" /><br />
+    <input type='password' name='inputPassword' id='password' required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /><br />
 </div>
 <div class='fila'>
     <input type='submit' name='enviar' value='Enviar' />
